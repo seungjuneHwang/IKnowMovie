@@ -26,7 +26,6 @@ public class MovieFrontControll extends HttpServlet {
    public MovieFrontControll() {
       mdao = new MovieDAO();
       mdto = new MovieDTO();
-
    }
    
    private String getFilename(Part part) {
@@ -58,8 +57,6 @@ public class MovieFrontControll extends HttpServlet {
       String requestURI = request.getRequestURI();
       String contextPath = request.getContextPath();
       String command = requestURI.substring(contextPath.length());
-      
-   
 
       if (command.equals("/SM_MovieRegist.mo")) {
          Part part = request.getPart("theFile");
@@ -84,13 +81,9 @@ public class MovieFrontControll extends HttpServlet {
          RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp?page=Main_Movie_manager");
          request.setAttribute("movieList", movieList);
          dispatcher.forward(request, response);
-
       }
-
       else if (command.equals("/movieUpdate")) {
-
+    	  
       }
-
    }
-
 }

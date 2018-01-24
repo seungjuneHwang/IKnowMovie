@@ -1,4 +1,4 @@
-package kr.co.four;
+ï»¿package kr.co.four;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,7 +38,7 @@ public class TableDAO {
 
 	}
 
-	public int totalCount() {// ÆäÀÌÂ¡Ã³¸®: ÀüÃ¼·¹ÄÚµå °³¼ö ±¸ÇÏ±â
+	public int totalCount() {// í˜ì´ì§•ì²˜ë¦¬: ì „ì²´ë ˆì½”ë“œ ê°œìˆ˜ êµ¬í•˜ê¸°
 		int count = 0;
 		try {
 			sql = "select count(*) from ticket";
@@ -51,18 +51,18 @@ public class TableDAO {
 			e.printStackTrace();
 		}
 		return count;
-	}// ÆäÀÌÂ¡Ã³¸®: ÀüÃ¼·¹ÄÚµå °³¼ö ±¸ÇÏ±â
+	}// í˜ì´ì§•ì²˜ë¦¬: ì „ì²´ë ˆì½”ë“œ ê°œìˆ˜ êµ¬í•˜ê¸°
 
-	public PageTo page(int curPage) {// ÆäÀÌÁö±¸Çö
+	public PageTo page(int curPage) {// í˜ì´ì§€êµ¬í˜„
 		PageTo pageTo = new PageTo();
 		int totalCount = totalCount();
 		ArrayList<TableDTO> list = new ArrayList<TableDTO>();
 		try {
 			sql = "select ticket.nal as nal,TICKET.ORIGINAL as original,TICKET.MORNING as morning,TICKET.NIGHT as night,TICKET.COUPON as coupon,TICKET.WEND as wend,TICKET.TICKETSU as ticketsu,MARKET.POP as pop,MARKET.COL as col,MARKET.OGING as oging,market.dog as dog,MARKET.CHIKEN as chiken,market.coffee as coffee,MARKET.COMBO1 as combo1,market.combo2 as combo2,MARKET.WATER1 as water1 from ticket inner join market on ticket.nal = market.nal order by ticket.nal ";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			// TYPE_SCROLL_INSENSITIVE:scrollÀº °¡´ÉÇÏ³ª, º¯°æµÈ »çÇ×Àº Àû¿ëµÇÁö ¾ÊÀ½
-			// ¾ç¹æÇâ, ½ºÅ©·Ñ ½Ã ¾÷µ¥ÀÌÆ® ¹İ¿µ¾ÈÇÔ
-			// CONCUR_READ_ONLY :Ä¿¼­ÀÇ À§Ä¡¿¡¼­ Á¤º¸ ¾÷µ¥ÀÌÆ® ºÒ°¡,ResultSetÀÇ º¯°æÀÌ ºÒ°¡´É
+			// TYPE_SCROLL_INSENSITIVE:scrollì€ ê°€ëŠ¥í•˜ë‚˜, ë³€ê²½ëœ ì‚¬í•­ì€ ì ìš©ë˜ì§€ ì•ŠìŒ
+			// ì–‘ë°©í–¥, ìŠ¤í¬ë¡¤ ì‹œ ì—…ë°ì´íŠ¸ ë°˜ì˜ì•ˆí•¨
+			// CONCUR_READ_ONLY :ì»¤ì„œì˜ ìœ„ì¹˜ì—ì„œ ì •ë³´ ì—…ë°ì´íŠ¸ ë¶ˆê°€,ResultSetì˜ ë³€ê²½ì´ ë¶ˆê°€ëŠ¥
 			rs = pstmt.executeQuery();
 			int perPage = pageTo.getPerPage();// 5
 			int skip = (curPage - 1) * perPage;
@@ -72,8 +72,8 @@ public class TableDAO {
 			if (skip > 0) {
 				rs.absolute(skip);
 			}
-			// ResultSetÀÇ absolute¸Ş¼Òµå¸¦ ÀÌ¿ëÇÏ¿© ÇØ´ç ÆäÀÌÁöÀÇ Cursor ÀÇ À§Ä¡·Î ÀÌµ¿...
-			System.out.println("ÁøÀÔÅ×½ºÆ®");
+			// ResultSetì˜ absoluteë©”ì†Œë“œë¥¼ ì´ìš©í•˜ì—¬ í•´ë‹¹ í˜ì´ì§€ì˜ Cursor ì˜ ìœ„ì¹˜ë¡œ ì´ë™...
+			System.out.println("ì§„ì…í…ŒìŠ¤íŠ¸");
 			for (int i = 0; i < perPage && rs.next(); i++) {
 				String nal = rs.getString("nal");
 				int ticketSalse = rs.getInt("original") + rs.getInt("morning") + rs.getInt("night") + rs.getInt("wend");
@@ -93,14 +93,14 @@ public class TableDAO {
 				data.setNetIncome(netIncome);
 				list.add(data);
 			}
-			pageTo.setBoardlist(list);// ArrayList ÀúÀå
-			pageTo.setTotalCount(totalCount);// ÀüÃ¼·¹ÄÚµå°³¼ö
-			pageTo.setCurPage(curPage);// ÇöÀçÆäÀÌÁö
+			pageTo.setBoardlist(list);// ArrayList ì €ì¥
+			pageTo.setTotalCount(totalCount);// ì „ì²´ë ˆì½”ë“œê°œìˆ˜
+			pageTo.setCurPage(curPage);// í˜„ì¬í˜ì´ì§€
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return pageTo;
-	}// ÆäÀÌÁö±¸Çö
+	}// í˜ì´ì§€êµ¬í˜„
 
 	public ArrayList<TableDTO> report(TableDTO tdto) {
 		try {
@@ -112,11 +112,11 @@ public class TableDAO {
 			String nal2 = tdto.getNal2();
 			rs = pstmt.executeQuery();
 			tableList = new ArrayList<TableDTO>();
-			System.out.println("whileÁøÀÔÀütdto");
+			System.out.println("whileì§„ì…ì „tdto");
 			System.out.println(tdto);
 			while (rs.next()) {
 				/*
-				 * System.out.println("º¯¼ö´ÙÂï±â½ÃÀÛ1"); System.out.println(rs.getString("nal"));
+				 * System.out.println("ë³€ìˆ˜ë‹¤ì°ê¸°ì‹œì‘1"); System.out.println(rs.getString("nal"));
 				 * System.out.println(rs.getInt("original"));
 				 * System.out.println(rs.getInt("morning"));
 				 * System.out.println(rs.getInt("night"));
@@ -132,19 +132,19 @@ public class TableDAO {
 				 * System.out.println(rs.getInt("water1"));
 				 */
 
-				System.out.println("º¯¼ö´ÙÂï±â½ÃÀÛ23");
+				System.out.println("ë³€ìˆ˜ë‹¤ì°ê¸°ì‹œì‘23");
 				tdto = new TableDTO();
 				int ticketSalse = rs.getInt("original") + rs.getInt("morning") + rs.getInt("night") + rs.getInt("wend");
 				int marketSalse = rs.getInt("pop") + rs.getInt("col") + rs.getInt("oging") + rs.getInt("dog")
 						+ rs.getInt("chiken") + rs.getInt("coffee") + rs.getInt("combo1") + rs.getInt("combo2")
 						+ rs.getInt("water1");
 				int totalSalse = ticketSalse + marketSalse;
-				System.out.println("³ª´©±â°¡¾ÈµÇ³ª");
+				System.out.println("ë‚˜ëˆ„ê¸°ê°€ì•ˆë˜ë‚˜");
 				System.out.println(totalSalse);
 				System.out.println(rs.getInt("ticketsu"));
 				
 				//int avgPeopleSalse = totalSalse / rs.getInt("ticketsu");
-				System.out.println("??±Ã±İ"); 
+				System.out.println("??ê¶ê¸ˆ"); 
 				tdto.setTotalSalse(totalSalse);
 				//tdto.setAvgPeopleSalse(avgPeopleSalse);
 				tdto.setToDayTicketSalse(ticketSalse);
@@ -161,24 +161,24 @@ public class TableDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nal2);
 			pstmt.setString(2, nal1);
-			// System.out.println("Ã¹¹øÂ°¹°À½Ç¥ = " + nal1);
-			// System.out.println("µÎ¹øÂ°¹°À½Ç¥ = " + nal2);
+			// System.out.println("ì²«ë²ˆì§¸ë¬¼ìŒí‘œ = " + nal1);
+			// System.out.println("ë‘ë²ˆì§¸ë¬¼ìŒí‘œ = " + nal2);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.println("³ª´©±â¿¡·¯ÀÎ°¡");
+				System.out.println("ë‚˜ëˆ„ê¸°ì—ëŸ¬ì¸ê°€");
 				/*
 				 * System.out.println(tdto.getTotalSalse() + "asdasdsad");
-				 * System.out.println(rs.getInt("dat") + " a¹ø");
-				 * System.out.println(rs.getInt("dat") + " b¹ø");
-				 * System.out.println(rs.getString("dat") + " 1¹ø");
-				 * System.out.println(rs.getShort("dat") + " 2¹ø");
-				 * System.out.println(rs.getDate("dat") + " 3¹ø");
-				 * System.out.println(rs.getDouble("dat") + " 4¹ø");
-				 * System.out.println(rs.getFloat("dat") + " 5¹ø");
-				 * System.out.println(rs.getLong("dat") + " 6¹ø");
-				 * System.out.println(rs.getBigDecimal("dat") + " 7¹ø");
+				 * System.out.println(rs.getInt("dat") + " aë²ˆ");
+				 * System.out.println(rs.getInt("dat") + " bë²ˆ");
+				 * System.out.println(rs.getString("dat") + " 1ë²ˆ");
+				 * System.out.println(rs.getShort("dat") + " 2ë²ˆ");
+				 * System.out.println(rs.getDate("dat") + " 3ë²ˆ");
+				 * System.out.println(rs.getDouble("dat") + " 4ë²ˆ");
+				 * System.out.println(rs.getFloat("dat") + " 5ë²ˆ");
+				 * System.out.println(rs.getLong("dat") + " 6ë²ˆ");
+				 * System.out.println(rs.getBigDecimal("dat") + " 7ë²ˆ");
 				 */
 				int avgDay = tdto.getTotalSalse() / rs.getInt("dat");
 				int avgMonth = tdto.getTotalSalse() / (rs.getInt("dat") / 12);

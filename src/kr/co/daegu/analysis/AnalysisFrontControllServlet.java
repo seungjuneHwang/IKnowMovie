@@ -34,9 +34,9 @@ public class AnalysisFrontControllServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String requestURI  =request.getRequestURI();//jsp¸ŞÀÎ¿¡ ÀÛ¼ºµÈ  actionÁÖ¼Ò·Î º¸³½´Ù°í ÇØ¼­ ´Ù °¡´Â°Ô¾Æ´Ï´Ù. localhost¶ó°íÇØ¼­ (ÁÖ¼Ò ¸Ç¾Õ)¸ğµç°Ô ´Ù ³Ñ¾î°¨. ±Ùµ¥ ÀÌ °úÁ¤À» °ÅÄ£ ¼ø°£ ÀÚ¹Ùº¯¼ö¿¡ ´ã±ä´Ù.
+		String requestURI  =request.getRequestURI();//jspë©”ì¸ì— ì‘ì„±ëœ  actionì£¼ì†Œë¡œ ë³´ë‚¸ë‹¤ê³  í•´ì„œ ë‹¤ ê°€ëŠ”ê²Œì•„ë‹ˆë‹¤. localhostë¼ê³ í•´ì„œ (ì£¼ì†Œ ë§¨ì•)ëª¨ë“ ê²Œ ë‹¤ ë„˜ì–´ê°. ê·¼ë° ì´ ê³¼ì •ì„ ê±°ì¹œ ìˆœê°„ ìë°”ë³€ìˆ˜ì— ë‹´ê¸´ë‹¤.
 		String contextPath = request.getContextPath();//
-		String command = requestURI.substring(contextPath.length());//À§¿¡ µÎ°³¿¡¼­ ÀÚ¸£°í ³²Àº ºÎºĞÀ» substringÂ¥¸£°Ú´Ù. ÀüÃ¼ÁÖ¼ÒÁß¿¡ contextPath.length¸¸Å­À» Â¥¸¥´Ù. ±×¸®°í ¾Æ·§Á· if¹®¾È¿¡ boardList.boa¿Í ºñ±³ÇÑ´Ù.
+		String command = requestURI.substring(contextPath.length());//ìœ„ì— ë‘ê°œì—ì„œ ìë¥´ê³  ë‚¨ì€ ë¶€ë¶„ì„ substringì§œë¥´ê² ë‹¤. ì „ì²´ì£¼ì†Œì¤‘ì— contextPath.lengthë§Œí¼ì„ ì§œë¥¸ë‹¤. ê·¸ë¦¬ê³  ì•„ë«ì¡± ifë¬¸ì•ˆì— boardList.boaì™€ ë¹„êµí•œë‹¤.
 		
 		if(command.equals("/dayAver.analysis")) {
 			String nal1 = request.getParameter("nal1");
@@ -44,7 +44,7 @@ public class AnalysisFrontControllServlet extends HttpServlet {
 			analysisDTO.setNal1(nal1);
 			analysisDTO.setNal2(nal2);
 			response.sendRedirect("analysisList.analysis");
-		}//°Ë»ö ³¯Â¥
+		}//ê²€ìƒ‰ ë‚ ì§œ
 	
 	}
 

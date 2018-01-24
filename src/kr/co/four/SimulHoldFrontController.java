@@ -1,4 +1,4 @@
-package kr.co.four;
+Ôªøpackage kr.co.four;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +38,7 @@ public class SimulHoldFrontController extends HttpServlet {
 		String command = requestURL.substring(contextPath.length());
 		
 		System.out.println(command);
-		if(command.equals("/enter.hold")) {//∞Ì¡§µ∑
+		if(command.equals("/enter.hold")) {//Í≥†Ï†ïÎèà
 			String nal = request.getParameter("nal");
 			int placem = Integer.parseInt(request.getParameter("placem"));
 			int wage = Integer.parseInt(request.getParameter("wage"));
@@ -49,7 +49,7 @@ public class SimulHoldFrontController extends HttpServlet {
 			simulHoldDTO.setTax(tax);
 			simulHoldDAO.holdinsert(simulHoldDTO);
 			response.sendRedirect("template.jsp?page=simulator");
-		}//∞Ì¡§ µ∑
+		}//Í≥†Ï†ï Îèà
 	}
 
 }

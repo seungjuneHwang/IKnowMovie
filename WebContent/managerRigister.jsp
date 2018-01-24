@@ -61,6 +61,25 @@ th{
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>register form</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+function openId(){
+	var id = $("#id").val();
+	console.log(id);
+	$.ajax({
+			url: 'idcheck.manager',
+			type: 'post',
+			data :{
+				"id": id
+			},
+			success: function(result) {
+				console.log(result);
+// 		        location.href="bapzip_rlist.jsp?bz_type=" + result + "&bz_minprice=" + bz_minprice;
+	        
+		    }
+	});
+}
+</script>
 </head>
 <body>
 <h1 class="register">등록 <small>register</small></h1>
@@ -68,8 +87,8 @@ th{
 <fieldset>
       <table>
       <tr><th>아이디</th>
-      <td><input type="text" name="id" placeholder="아이디" required="required"></td>
-      <td><input type="button" value="중복확인" onClick="openId(this.form)"></td>
+      <td><input type="text" id="id" name="id" placeholder="아이디" required="required"></td>
+      <td><input type="button" value="중복확인" onClick="openId()"></td>
       </tr>
       <tr><th>비밀번호</th>
       <td><input type="text" name="pw" placeholder="비밀번호" required="required"></td>

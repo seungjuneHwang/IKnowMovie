@@ -19,12 +19,6 @@ public class MovieDTO {
       // TODO Auto-generated constructor stub
    }
 
-   
-
-
-
-
-
    public MovieDTO(int no, String picture, String title, String rank, String kind, String time, String grade,
          String director, String actor, String side1, String side2, String side3) {
       super();
@@ -42,43 +36,21 @@ public class MovieDTO {
       this.side3 = side3;
    }
 
-
-
-
-
-
-
    public int getNo() {
       return no;
    }
-
-
 
    public void setNo(int no) {
       this.no = no;
    }
 
-
-
    public String getPicture() {
       return picture;
    }
 
-
-
-
-
-
-
    public void setPicture(String picture) {
       this.picture = picture;
    }
-
-
-
-
-
-
 
    public String getTitle() {
       return title;
@@ -159,12 +131,6 @@ public class MovieDTO {
    public void setSide3(String side3) {
       this.side3 = side3;
    }
-
-
-
-
-
-
 
    @Override
    public String toString() {

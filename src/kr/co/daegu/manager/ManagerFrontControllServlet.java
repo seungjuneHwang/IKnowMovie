@@ -13,147 +13,153 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("*.manager")
 public class ManagerFrontControllServlet extends HttpServlet {
-   private static final long serialVersionUID = 1L;
-       managerDTO mdto;
-       managerDAO mdao; 
-    public ManagerFrontControllServlet() {
-       mdto = new managerDTO();
-       mdao = new managerDAO();
-    }
+	private static final long serialVersionUID = 1L;
+	managerDTO mdto;
+	managerDAO mdao;
 
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   doPost(request, response);
-   }
+	public ManagerFrontControllServlet() {
+//		mdto = new managerDTO();
+//		mdao = new managerDAO();
+	}
 
-   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   request.setCharacterEncoding("utf-8");
-   response.setContentType("text/html; charset=utf-8");
-   PrintWriter out = response.getWriter();
-   String requestURI = request.getRequestURI();
-   String contextPath = request.getContextPath();
-   String command = requestURI.substring(contextPath.length());
-   if (command.equals("/Register.manager")) {//µî·Ï
-      String id = request.getParameter("id");
-      String pw = request.getParameter("pw");
-      String pwsh = request.getParameter("pwsh");
-      String lv = request.getParameter("lv");
-      String part = request.getParameter("part");
-      String name = request.getParameter("name");
-      mdto.setId(id);
-      mdto.setPw(pw);
-      mdto.setPwsh(pwsh);
-      mdto.setLv(lv);
-      mdto.setPart(part);
-      mdto.setName(name);
-      mdao.managerRegister(mdto);
-      out.print("µî·ÏµÇ¾ú½À´Ï´Ù.");
-      response.sendRedirect("template.jsp");
-   }//µî·Ï
-   
-   
-   else if(command.equals("/idcheck.manager")) {//¾ÆÀÌµğ Áßº¹¿©ºÎ
-      String id = request.getParameter("id");
-      mdto.setId(id);
-      boolean idcheck = mdao.managerIdCheck(mdto);
-      if(idcheck==true) {
-         out.print("¾ÆÀÌµğ°¡ ÀÌ¹Ì »ç¿ëÁßÀÔ´Ï´Ù.");
-      }else {
-         out.print("¾ÆÀÌµğ°¡ »ç¿ë °¡´ÉÇÕ´Ï´Ù.");
-      }
-      out.print("<input type='button' value='Á¾·á' onClick='self.close()'>");
-   }//¾ÆÀÌµğ Áßº¹¿©ºÎ
-   
-   
-   else if(command.equals("/idSearch.manager")) {//¾ÆÀÌµğÃ£±â
-      String name = request.getParameter("name");
-      String part = request.getParameter("part");
-      mdto.setName(name);
-      mdto.setPart(part);
-      String id = mdao.managerIdSearch(mdto);
-      if(id==null) {
-         out.print("ÀÌ¸§ÀÌ³ª ºÎ¼­°¡ Àß¸øµÇ¾ú½À´Ï´Ù.");
-      }else {
-         out.print("Ã£À¸½Ã´Â ¾ÆÀÌµğ´Â="+id+"ÀÔ´Ï´Ù.");
-      }
-      out.print("<input type='button' value='Á¾·á' onClick='self.close()'>");
-   }//¾ÆÀÌµğÃ£±â
-   
-   
-   else if(command.equals("/pwSearch.manager")) {//ºñ¹Ğ¹øÈ£ Ã£±â
-      String id = request.getParameter("id");
-      String name = request.getParameter("name");
-      String part = request.getParameter("part");
-      mdto.setId(id);
-      mdto.setName(name);
-      mdto.setPart(part);
-      String pw = mdao.managerPwSearch(mdto);
-      if(pw==null) {
-         out.print("id³ª ÀÌ¸§ÀÌ³ª ºÎ¼­ÀÌ Àß¸øµÇ¾ú½À´Ï´Ù.");
-      }else {
-         out.print("Ã£À¸½Ã´Â ºñ¹Ğ¹øÈ£´Â"+pw+"ÀÔ´Ï´Ù.");
-      }
-      out.print("<input type='button' value='Á¾·á' onClick='self.close()'>");
-   }//ºñ¹Ğ¹øÈ£ Ã£±â
-   
-   
-   else if(command.equals("/loginform.manager")) {//·Î±×ÀÎ
-      HttpSession session = request.getSession(false);
-      String id = request.getParameter("id");
-      String pw = request.getParameter("pw");
-      mdto.setId(id);
-      mdto.setPw(pw);
-      boolean login=mdao.managerLogin(mdto);
-      if(login==true) {
-         session.setAttribute("id",id);
-         System.out.println(session.getAttribute("id"));
-         response.sendRedirect("template.jsp");
-      }else {
-         response.sendRedirect("template.jsp?page=managerLogin");
-      }
-   }//·Î±×ÀÎ
-   
-   
-   else if(command.equals("/logout.manager")) {//·Î±×¾Æ¿ô
-      HttpSession session = request.getSession(false);
-      session.removeAttribute("id");
-      response.sendRedirect("template.jsp");
-   }//·Î±×¾Æ¿ô
-   
-   
-   else if(command.equals("/updateView.manager")) {//¼öÁ¤view
-      String id = request.getParameter("id");
-      String pw = request.getParameter("pw");
-      String pwsh = request.getParameter("pwsh");
-      String lv = request.getParameter("lv");
-      String name = request.getParameter("name"); 
-      String part = request.getParameter("part");
-      mdto.setId(id);
-      mdto.setPw(pw);
-      mdto.setPwsh(pwsh);
-      mdto.setLv(lv);
-      mdto.setName(name);
-      mdto.setPart(part);
-      mdao.managerUpdate(mdto);
-      out.print("Á¤º¸°¡ ¼öÁ¤µÇ¾ú½À´Ï´Ù.");
-      response.sendRedirect("template.jsp?page=managerLogin");
-   }//¼öÁ¤view
-   else if(command.equals("/update.manager")) {//¼öÁ¤
-      HttpSession session = request.getSession(false);
-      String id = (String) session.getAttribute("id");
-      mdto.setId(id);
-      System.out.println();
-      mdto=mdao.managerUpdateView(mdto);
-      RequestDispatcher dis = request.getRequestDispatcher("template.jsp?page=managerUpdate2");
-      request.setAttribute("mdto", mdto);
-      dis.forward(request, response);
-   }//¼öÁ¤
-   else if(command.equals("/delete.manager")) {//»èÁ¦
-      HttpSession session = request.getSession(false);
-      String id = (String) session.getAttribute("id");
-      mdto.setId(id);
-      mdao.managerLeave(mdto);
-      session.removeAttribute("id");
-      response.sendRedirect("template.jsp");
-   }//»èÁ¦
-  }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
+		System.out.println("ë§¤ë‹ˆì € ì»¨íŠ¸ë¡¤ëŸ¬ ë©”ì¸");
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String requestURI = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String command = requestURI.substring(contextPath.length());
+		
+		if (command.equals("/idcheck.manager")) {// ì•„ì´ë”” ì¤‘ë³µì—¬ë¶€
+			String id = request.getParameter("id");
+			System.out.println(id);
+			// mdto.setId(id);
+			//boolean idcheck = mdao.managerIdCheck(mdto);
+//			if (idcheck == true) {
+//				out.print("ì•„ì´ë””ê°€ ì´ë¯¸ ì‚¬ìš©ì¤‘ì…ë‹ˆë‹¤.");
+//			} else {
+//				out.print("ì•„ì´ë””ê°€ ì‚¬ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+//			}
+			out.print("<input type='button' value='ì¢…ë£Œ' onClick='self.close()'>");
+		}
+//		
+//		if (command.equals("/Register.manager")) {// ë“±ë¡
+//			String id = request.getParameter("id");
+//			String pw = request.getParameter("pw");
+//			String pwsh = request.getParameter("pwsh");
+//			String lv = request.getParameter("lv");
+//			String part = request.getParameter("part");
+//			String name = request.getParameter("name");
+//			System.out.println("id");
+//			// mdto.setId(id);
+//			// mdto.setPw(pw);
+//			// mdto.setPwsh(pwsh);
+//			// mdto.setLv(lv);
+//			// mdto.setPart(part);
+//			// mdto.setName(name);
+//			// mdao.managerRegister(mdto);
+//			out.print("ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
+//			response.sendRedirect("template.jsp");
+//		} else if (command.equals("/idcheck.manager")) {// ì•„ì´ë”” ì¤‘ë³µì—¬ë¶€
+//			String id = request.getParameter("id");
+//			// mdto.setId(id);
+//			boolean idcheck = mdao.managerIdCheck(mdto);
+//			if (idcheck == true) {
+//				out.print("ì•„ì´ë””ê°€ ì´ë¯¸ ì‚¬ìš©ì¤‘ì…ë‹ˆë‹¤.");
+//			} else {
+//				out.print("ì•„ì´ë””ê°€ ì‚¬ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+//			}
+//			out.print("<input type='button' value='ì¢…ë£Œ' onClick='self.close()'>");
+//		} else if (command.equals("/idSearch.manager")) {// ì•„ì´ë””ì°¾ê¸°
+//			String name = request.getParameter("name");
+//			String part = request.getParameter("part");
+//			mdto.setName(name);
+//			mdto.setPart(part);
+//			String id = mdao.managerIdSearch(mdto);
+//			if (id == null) {
+//				out.print("ì´ë¦„ì´ë‚˜ ë¶€ì„œê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.");
+//			} else {
+//				out.print("ì°¾ìœ¼ì‹œëŠ” ì•„ì´ë””ëŠ”=" + id + "ì…ë‹ˆë‹¤.");
+//			}
+//			out.print("<input type='button' value='ì¢…ë£Œ' onClick='self.close()'>");
+//		} else if (command.equals("/pwSearch.manager")) {// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
+//			String id = request.getParameter("id");
+//			String name = request.getParameter("name");
+//			String part = request.getParameter("part");
+//			mdto.setId(id);
+//			mdto.setName(name);
+//			mdto.setPart(part);
+//			String pw = mdao.managerPwSearch(mdto);
+//			if (pw == null) {
+//				out.print("idë‚˜ ì´ë¦„ì´ë‚˜ ë¶€ì„œì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.");
+//			} else {
+//				out.print("ì°¾ìœ¼ì‹œëŠ” ë¹„ë°€ë²ˆí˜¸ëŠ”" + pw + "ì…ë‹ˆë‹¤.");
+//			}
+//			out.print("<input type='button' value='ì¢…ë£Œ' onClick='self.close()'>");
+//		} // ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
+//
+//		else if (command.equals("/loginform.manager")) {// ë¡œê·¸ì¸
+//			HttpSession session = request.getSession(false);
+//			String id = request.getParameter("id");
+//			String pw = request.getParameter("pw");
+//			mdto.setId(id);
+//			mdto.setPw(pw);
+//			boolean login = mdao.managerLogin(mdto);
+//			if (login == true) {
+//				session.setAttribute("id", id);
+//				System.out.println(session.getAttribute("id"));
+//				response.sendRedirect("template.jsp");
+//			} else {
+//				response.sendRedirect("template.jsp?page=managerLogin");
+//			}
+//		} // ë¡œê·¸ì¸
+//
+//		else if (command.equals("/logout.manager")) {// ë¡œê·¸ì•„ì›ƒ
+//			HttpSession session = request.getSession(false);
+//			session.removeAttribute("id");
+//			response.sendRedirect("template.jsp");
+//		} // ë¡œê·¸ì•„ì›ƒ
+//
+//		else if (command.equals("/updateView.manager")) {// ìˆ˜ì •view
+//			String id = request.getParameter("id");
+//			String pw = request.getParameter("pw");
+//			String pwsh = request.getParameter("pwsh");
+//			String lv = request.getParameter("lv");
+//			String name = request.getParameter("name");
+//			String part = request.getParameter("part");
+//			mdto.setId(id);
+//			mdto.setPw(pw);
+//			mdto.setPwsh(pwsh);
+//			mdto.setLv(lv);
+//			mdto.setName(name);
+//			mdto.setPart(part);
+//			mdao.managerUpdate(mdto);
+//			out.print("ì •ë³´ê°€ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.");
+//			response.sendRedirect("template.jsp?page=managerLogin");
+//		} // ìˆ˜ì •view
+//		else if (command.equals("/update.manager")) {// ìˆ˜ì •
+//			HttpSession session = request.getSession(false);
+//			String id = (String) session.getAttribute("id");
+//			mdto.setId(id);
+//			System.out.println();
+//			mdto = mdao.managerUpdateView(mdto);
+//			RequestDispatcher dis = request.getRequestDispatcher("template.jsp?page=managerUpdate2");
+//			request.setAttribute("mdto", mdto);
+//			dis.forward(request, response);
+//		} // ìˆ˜ì •
+//		else if (command.equals("/delete.manager")) {// ì‚­ì œ
+//			HttpSession session = request.getSession(false);
+//			String id = (String) session.getAttribute("id");
+//			mdto.setId(id);
+//			mdao.managerLeave(mdto);
+//			session.removeAttribute("id");
+//			response.sendRedirect("template.jsp");
+//		} // ì‚­ì œ
+	}
 }

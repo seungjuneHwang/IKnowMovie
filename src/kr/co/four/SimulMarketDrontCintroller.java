@@ -1,4 +1,4 @@
-package kr.co.four;
+ï»¿package kr.co.four;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +38,7 @@ public class SimulMarketDrontCintroller extends HttpServlet {
 		String command = requestURL.substring(contextPath.length());
 		
 		System.out.println(command);
-		if(command.equals("/enter.market")) {//¸¶ÄÏ °¹¼ö³Ñ±â±â
+		if(command.equals("/enter.market")) {//ë§ˆì¼“ ê°¯ìˆ˜ë„˜ê¸°ê¸°
 			String nal = request.getParameter("nal");
 			int pop = Integer.parseInt(request.getParameter("pop"))*5000;
 			int col = Integer.parseInt(request.getParameter("col"))*2000;
@@ -62,7 +62,7 @@ public class SimulMarketDrontCintroller extends HttpServlet {
 			simulMarketDAO.marketinsert(simulMarketDTO);
 			response.sendRedirect("template.jsp?page=simulator");
 			
-		}//¸¶ÄÏ°¹¼ö³Ñ±â±â
+		}//ë§ˆì¼“ê°¯ìˆ˜ë„˜ê¸°ê¸°
 	
 	}
 

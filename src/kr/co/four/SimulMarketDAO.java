@@ -1,4 +1,4 @@
-package kr.co.four;
+ï»¿package kr.co.four;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ public class SimulMarketDAO {
 	private ArrayList<SimulMarketDTO> marketList;
 	private int cnt;
 	
-	public SimulMarketDAO() {//¸¶ÄÏ »ı¼ºÀÚ
+	public SimulMarketDAO() {//ë§ˆì¼“ ìƒì„±ì
 		try {
 			Context ctx = new InitialContext();
 			marketList = new ArrayList<SimulMarketDTO>();
@@ -31,7 +31,7 @@ public class SimulMarketDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}//¸¶ÄÏ »ı¼ºÀÚ
+	}//ë§ˆì¼“ ìƒì„±ì
 	
 	public void marketinsert(SimulMarketDTO simulMarketDTO) {
 		sql = "insert into market(nal,pop,col,oging,dog,chiken,coffee,combo1,combo2,water1) values(?,?,?,?,?,?,?,?,?,?)";

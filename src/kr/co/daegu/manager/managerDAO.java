@@ -5,10 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import kr.ac.daegu.JdbcUtil;
 
    public class managerDAO {
    private DataSource dataFactory;
@@ -18,19 +18,21 @@ import javax.sql.DataSource;
    private ResultSet rs;
    private String id;
    private int cnt;
+   
    public managerDAO() {
          try {
-            Context ctx = new InitialContext();
-            dataFactory = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle11g");
-            conn = dataFactory.getConnection();
-         } catch (NamingException e) {
-            e.printStackTrace();
-         } catch (SQLException e) {
+        	 System.out.println("ê´€ë¦¬ì DAO");
+//            Context ctx = new InitialContext();
+//            dataFactory = (DataSource)ctx.lookup(ConstVal.DB_NAME);
+//            conn = dataFactory.getConnection();
+//        	 conn = JdbcUtil.getConnection();
+         } catch (Exception e) {
             e.printStackTrace();
          }
    }
    
-   public void managerRegister(managerDTO mdto) {//µî·Ï
+   public void managerRegister(managerDTO mdto) {
+	   System.out.println("íšŒì› ê°€ì… ë©”ì†Œë“œ");
       sql = "insert into manager(id,pw,pwsh,lv,part,name) values(?,?,?,?,?,?)";
       try {
          pstmt = conn.prepareStatement(sql);
@@ -44,8 +46,9 @@ import javax.sql.DataSource;
       } catch (SQLException e) {
          e.printStackTrace();
       }
-   }//µî·Ï
-   public boolean managerIdCheck(managerDTO mdto) {//¾ÆÀÌµğ Áßº¹¿©ºÎ
+   }
+   public boolean managerIdCheck(managerDTO mdto) {
+	  System.out.println("id ì²´í¬ ë©”ì†Œë“œ");
       boolean idCheck = false;
       try {
          sql = "select id from manager where id=?";
@@ -59,8 +62,8 @@ import javax.sql.DataSource;
          e.printStackTrace();
       }
       return idCheck;
-   }//¾ÆÀÌµğ Áßº¹¿©ºÎ
-   public String managerIdSearch(managerDTO mdto) {//¾ÆÀÌµğÃ£±â
+   }
+   public String managerIdSearch(managerDTO mdto) {
       sql = "select id from manager where name=? and part=?";
       try {
          pstmt = conn.prepareStatement(sql);
@@ -74,8 +77,8 @@ import javax.sql.DataSource;
          e.printStackTrace();
       }
       return id;
-   }//¾ÆÀÌµğÃ£±â
-   public String managerPwSearch(managerDTO mdto) {//ºñ¹Ğ¹øÈ£ Ã£±â
+   }
+   public String managerPwSearch(managerDTO mdto) {
       String pw=null;
       sql = "select pw from manager where id=? and name=? and part=?";
       try {
@@ -91,8 +94,8 @@ import javax.sql.DataSource;
          e.printStackTrace();
       }
       return pw;
-   }//ºñ¹Ğ¹øÈ£Ã£±â
-   public boolean managerLogin(managerDTO mdto) {//·Î±×ÀÎ
+   }
+   public boolean managerLogin(managerDTO mdto) {//ï¿½Î±ï¿½ï¿½ï¿½
       boolean login=false;
       sql = "select id,pw from manager where id=? and pw=?";
       try {
@@ -107,8 +110,8 @@ import javax.sql.DataSource;
          e.printStackTrace();
       }
       return login;
-   }//·Î±×ÀÎ
-   public managerDTO managerUpdateView(managerDTO mdto) {//¼öÁ¤
+   }//ï¿½Î±ï¿½ï¿½ï¿½
+   public managerDTO managerUpdateView(managerDTO mdto) {//ï¿½ï¿½ï¿½ï¿½
       sql = "select id,pw,pwsh,lv,part,name from manager where id=?";
       try {
          pstmt = conn.prepareStatement(sql);
@@ -126,8 +129,8 @@ import javax.sql.DataSource;
          e.printStackTrace();
       }
       return mdto;
-   }//¼öÁ¤
-   public void managerUpdate(managerDTO mdto) {//¼öÁ¤view
+   }//ï¿½ï¿½ï¿½ï¿½
+   public void managerUpdate(managerDTO mdto) {//ï¿½ï¿½ï¿½ï¿½view
       sql = "update manager set pw=?, pwsh=?, lv=?, part=?, name=? where id=?";
       try {
          pstmt = conn.prepareStatement(sql);
@@ -141,9 +144,9 @@ import javax.sql.DataSource;
       } catch (SQLException e) {
          e.printStackTrace();
       }
-   }//¼öÁ¤view
+   }//ï¿½ï¿½ï¿½ï¿½view
    
-   public void managerLeave(managerDTO mdto) {//»èÁ¦
+   public void managerLeave(managerDTO mdto) {//ï¿½ï¿½ï¿½ï¿½
       try {
          sql = "delete from manager where id=?";
          pstmt = conn.prepareStatement(sql);
@@ -152,5 +155,5 @@ import javax.sql.DataSource;
       } catch (SQLException e) {
          e.printStackTrace();
       }
-   }//»èÁ¦
+   }//ï¿½ï¿½ï¿½ï¿½
 }

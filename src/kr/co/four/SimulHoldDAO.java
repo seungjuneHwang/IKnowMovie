@@ -33,7 +33,7 @@ public class SimulHoldDAO {
 		}
 	}
 	
-	public void holdinsert(SimulHoldDTO simulHoldDTO) {//°íÁ¤±Ý¾× ³Ö±â
+	public void holdinsert(SimulHoldDTO simulHoldDTO) {//ê³ ì •ê¸ˆì•¡ ë„£ê¸°
 		sql="insert into holdmoney(nal,placem,wage,tax) values(?,?,?,?)";
 		try {		
 			pstmt = conn.prepareStatement(sql);
@@ -45,5 +45,5 @@ public class SimulHoldDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}//°íÁ¤±Ý¾× ³Ö±â
+	}//ê³ ì •ê¸ˆì•¡ ë„£ê¸°
 }

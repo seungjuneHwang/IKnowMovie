@@ -1,4 +1,4 @@
-package kr.co.four;
+ï»¿package kr.co.four;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,18 +41,19 @@ public class TableFrontControl extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = requestURL.substring(contextPath.length());
 
-		if (command.equals("/totalList.ta")) {// ¸ñ·Ï
-			int curPage = 1;// ±âº»ÆäÀÌÁö
+		if (command.equals("/totalList.ta")) {// ëª©ë¡
+			int curPage = 1;// ê¸°ë³¸í˜ì´ì§€
 			if (request.getParameter("curPage") != null) {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
 			}
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			PageTo list = tdao.page(curPage);
 
 			RequestDispatcher dis = request.getRequestDispatcher("template.jsp?page=simulator");
 			request.setAttribute("page", list);
-			// listPage.jsp¿¡¼­ ¸ñ·Ï ¸®½ºÆ® µ¥ÀÌÅÍ ÀúÀå
+			// listPage.jspì—ì„œ ëª©ë¡ ë¦¬ìŠ¤íŠ¸ ë°ì´í„° ì €ì¥
 			request.setAttribute("list", list.getBoardlist());
-			// page.jsp¿¡¼­ ÆäÀÌÂ¡ Ã³¸® µ¥ÀÌÅÍ ÀúÀå
+			// page.jspì—ì„œ í˜ì´ì§• ì²˜ë¦¬ ë°ì´í„° ì €ì¥
 			dis.forward(request, response);
 
 		} else if (command.equals("/report.ta")) {
@@ -71,19 +72,19 @@ public class TableFrontControl extends HttpServlet {
 			session.setAttribute("tableList", tableList);
 			dispatcher.forward(request, response);
 
-		} else if (command.equals("/mainList.ta")) {//Å×ÀÌºí Æò±Õ ³Ñ±â±â
+		} else if (command.equals("/mainList.ta")) {//í…Œì´ë¸” í‰ê·  ë„˜ê¸°ê¸°
 			tableList = tdao.head(tdto);
 			System.out.println(tableList);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("totalList.ta");
 			request.setAttribute("totalList", tableList);
 			dispatcher.forward(request, response);
-		}//Å×ÀÌºí ¸®½ºÆ® ³Ñ±â±â
+		}//í…Œì´ë¸” ë¦¬ìŠ¤íŠ¸ ë„˜ê¸°ê¸°
 		
-		else if(command.equals("/mainDelete")) {//¸®½ºÆ® »èÁ¦
+		else if(command.equals("/mainDelete")) {//ë¦¬ìŠ¤íŠ¸ ì‚­ì œ
 			String deleteNal = request.getParameter("nal");
 			tdto.setNal(deleteNal);
 			tdao.mainDelete(tdto);
-		}//¸®½ºÆ®»èÁ¦
+		}//ë¦¬ìŠ¤íŠ¸ì‚­ì œ
 		
 
 	}

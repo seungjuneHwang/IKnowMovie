@@ -1,4 +1,4 @@
-package kr.co.four;
+ï»¿package kr.co.four;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,7 +42,7 @@ public class SimulTicketFrontController extends HttpServlet {
 		String command = requestURL.substring(contextPath.length());
 
 		System.out.println(command);
-		if (command.equals("/enter.ticket")) {// °¹¼ö ¾× ³Ñ±â±â
+		if (command.equals("/enter.ticket")) {// ê°¯ìˆ˜ ì•¡ ë„˜ê¸°ê¸°
 			String nal = request.getParameter("nal");
 			int original = Integer.parseInt(request.getParameter("original"))*10000;
 			int morning = Integer.parseInt(request.getParameter("morning"))*8000;
@@ -59,7 +59,7 @@ public class SimulTicketFrontController extends HttpServlet {
 			simulTicketDTO.setTicketsu(ticketsu);
 			simulTicketDAO.ticketInsert(simulTicketDTO);
 			response.sendRedirect("template.jsp?page=simulator");
-		} // °¹¼ö ¾× ³Ñ±â±â
+		} // ê°¯ìˆ˜ ì•¡ ë„˜ê¸°ê¸°
 
 	}
 

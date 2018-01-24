@@ -1,4 +1,4 @@
-package kr.co.four;
+ï»¿package kr.co.four;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,13 +34,13 @@ public class SimulTicketDAO {
 			e.printStackTrace();
 		}
 	}
-	//Å¬·ÎÁî µé¾î°¡¾ßÇÔ ¿©±â
+	//í´ë¡œì¦ˆ ë“¤ì–´ê°€ì•¼í•¨ ì—¬ê¸°
 	
 	
 	
-	//Å¬·ÎÁîÀÚ¸®
+	//í´ë¡œì¦ˆìë¦¬
 	
-	public void ticketInsert(SimulTicketDTO simulTicketDTO) {//Æ¼ÄÏ °¹¼ö Ã¼Å©
+	public void ticketInsert(SimulTicketDTO simulTicketDTO) {//í‹°ì¼“ ê°¯ìˆ˜ ì²´í¬
 		sql="insert into ticket(nal,original,morning,night,coupon,wend,ticketsu) values(?,?,?,?,?,?,?)";
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -55,7 +55,7 @@ public class SimulTicketDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}//Æ¼ÄÏ °¹¼ö µî·Ï
+	}//í‹°ì¼“ ê°¯ìˆ˜ ë“±ë¡
 	
 	
 }
