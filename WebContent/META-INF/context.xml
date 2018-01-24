@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+	<Resource name="jdbc/team4" auth="Container" type="javax.sql.DataSource"
+	maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+	username="team4" password="4team!" driverClassName="com.mysql.jdbc.Driver"
+	url="jdbc:mysql://203.244.141.148:3306/team4"/>
+</Context>

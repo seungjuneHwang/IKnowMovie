@@ -2,6 +2,7 @@
     <wb-module deploy-name="IKnowMovie">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/Day20180112/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="context-root" value="IKnowMovie"/>
         <property name="java-output-path" value="/IKnowMovie/bin"/>
     </wb-module>

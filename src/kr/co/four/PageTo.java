@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class PageTo implements Serializable {
 
-	private ArrayList<TableDTO> boardlist; // ¸ñ·Ï¸®½ºÆ®ÀúÀå
-	private int curPage;// ÇöÀç ÆäÀÌÁö ¹øÈ£
-	private int perPage;// ÆäÀÌÁö´ç º¸¿©ÁÙ ·¹ÄÚµå °³¼ö
-	private int totalCount;// ÀüÃ¼·¹ÄÚµå°³¼ö
+	private ArrayList<TableDTO> boardlist; // ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½
+	private int curPage;// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	private int perPage;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+	private int totalCount;// ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½Úµå°³ï¿½ï¿½
 
 	public PageTo() {
 
@@ -21,6 +21,7 @@ public class PageTo implements Serializable {
 
 	public void setBoardlist(ArrayList<TableDTO> boardlist) {
 		this.boardlist = boardlist;
+		
 	}
 
 	public int getCurPage() {
